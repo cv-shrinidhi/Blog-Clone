@@ -1,0 +1,18 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+<div class="centerstage">
+  <h1 class="postheading">POSTS</h1>
+  {% for post in post_list %} <!-- post list is list view in models -->
+  <div class="post">
+    <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+    <!-- when user clicks on post.title, corresponding post details will open with primary key as reference -->
+    <div class="date">
+      <p>published on : {{ post.published_date|date:'D M Y' }}</p>
+      <!-- used template filters for date to show in particular format -->
+    </div>
+    <a href="{% url 'post_detail' pk=post.pk%}">Comments: {{ post.approve_comments.count }}</a>
+  </div>
+  <br>
+  {% endfor %}
+</div>
+{% endblock %}
